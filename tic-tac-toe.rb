@@ -81,7 +81,6 @@ puts "------------"
 puts "Rules: "
 puts "-> #{player1.name} is 'X', #{player2.name} is 'O'"
 puts "-> Choices are:\n-->     up left --   up center   -- up right\n--> center left -- center center -- center right\n-->   down left --  down center  -- down right"
-puts "-> NOT CHOOSING ANY OF THESE COMMANDS, OR TRYING TO SELECT AN ALREADY CHOSEN CELL, WILL SKIP YOUR TURN"
 puts "--------------------------------------"
 #Instructions
 
