@@ -28,21 +28,39 @@ class Player
         puts ("  #{@@six}  |  #{@@seven}  |  #{@@eight}  ")
         puts ("     |     |     ")
     end
+    def endgame 
+        (@@zero == @@one && @@one == @@two && @@zero != " ")      ? (p "#{self.name} WON!!"; $gameon = true) : nil
+        (@@three == @@four && @@four == @@five && @@three != " ") ? (p "#{self.name} WON!!"; $gameon = true) : nil
+        (@@six == @@seven && @@eight == @@two && @@six != " ")    ? (p "#{self.name} WON!!"; $gameon = true) : nil
+        (@@zero == @@three && @@three == @@six && @@zero != " ")  ? (p "#{self.name} WON!!"; $gameon = true) : nil
+        (@@one == @@four && @@four == @@seven && @@one != " ")    ? (p "#{self.name} WON!!"; $gameon = true) : nil
+        (@@two == @@five && @@five == @@eight && @@two != " ")    ? (p "#{self.name} WON!!"; $gameon = true) : nil
+        (@@zero == @@four && @@four == @@eight && @@zero != " ")  ? (p "#{self.name} WON!!"; $gameon = true) : nil
+        (@@two == @@four && @@four == @@six && @@two != " ")      ? (p "#{self.name} WON!!"; $gameon = true) : nil
+        display_grid if $gameon
+    end
+    def illegal 
+        puts "---------------------------------"
+        puts "ILLEGAL CHOICE BY ####{self.name}###, TRY AGAIN"
+        puts "!!!!!!!!!!!!!!!!!!!!!!!!"
+        self.challenge
+    end
     def challenge
-        self.display_grid
+        self.display_grid 
         print "#{self.name}'s choice is? "
         choice = gets.chomp
-        case choice
-        when "up left" then @@zero = self.player_sym if @@zero == " "
-        when "up center" then @@one = self.player_sym  if @@one == " "
-        when "up right" then @@two = self.player_sym if @@two == " "
-        when "center left" then @@three = self.player_sym if @@three == " "
-        when "center center" then @@four = self.player_sym if @@four == " "
-        when "center right" then @@five = self.player_sym if @@five == " "
-        when "down left" then @@six = self.player_sym if @@six == " "
-        when "down center" then @@seven = self.player_sym if @@seven == " "
-        when "down right" then @@eight = self.player_sym if @@eight == " "
+        case choice 
+        when "up left"       then @@zero == " " ?  @@zero  = self.player_sym : illegal
+        when "up center"     then @@one == " " ?   @@one   = self.player_sym : illegal
+        when "up right"      then @@two == " " ?   @@two   = self.player_sym : illegal
+        when "center left"   then @@three == " " ? @@three = self.player_sym : illegal
+        when "center center" then @@four == " " ?  @@four  = self.player_sym : illegal
+        when "center right"  then @@five == " " ?  @@five  = self.player_sym : illegal
+        when "down left"     then @@six == " " ?   @@six   = self.player_sym : illegal
+        when "down center"   then @@seven == " " ? @@seven = self.player_sym : illegal
+        when "down right"    then @@eight == " " ? @@eight = self.player_sym : illegal
         end
+        endgame
     end
 end
 
@@ -64,13 +82,19 @@ puts "Rules: "
 puts "-> #{player1.name} is 'X', #{player2.name} is 'O'"
 puts "-> Choices are:\n-->     up left --   up center   -- up right\n--> center left -- center center -- center right\n-->   down left --  down center  -- down right"
 puts "-> NOT CHOOSING ANY OF THESE COMMANDS, OR TRYING TO SELECT AN ALREADY CHOSEN CELL, WILL SKIP YOUR TURN"
-puts "-----------"
+puts "--------------------------------------"
 #Instructions
 
 player1.player_sym = "X"
 player2.player_sym = "O"
 
+$gameon = false
+
 while true
     player1.challenge
+    puts "--------------------"
+    break if $gameon
     player2.challenge
+    puts "--------------------"
+    break if $gameon
 end
