@@ -31,7 +31,7 @@ class Player
     def endgame 
         (@@zero == @@one && @@one == @@two && @@zero != " ")      ? (p "#{self.name} WON!!"; $gameon = true) : nil
         (@@three == @@four && @@four == @@five && @@three != " ") ? (p "#{self.name} WON!!"; $gameon = true) : nil
-        (@@six == @@seven && @@eight == @@two && @@six != " ")    ? (p "#{self.name} WON!!"; $gameon = true) : nil
+        (@@six == @@seven && @@seven == @@eight && @@six != " ")    ? (p "#{self.name} WON!!"; $gameon = true) : nil
         (@@zero == @@three && @@three == @@six && @@zero != " ")  ? (p "#{self.name} WON!!"; $gameon = true) : nil
         (@@one == @@four && @@four == @@seven && @@one != " ")    ? (p "#{self.name} WON!!"; $gameon = true) : nil
         (@@two == @@five && @@five == @@eight && @@two != " ")    ? (p "#{self.name} WON!!"; $gameon = true) : nil
